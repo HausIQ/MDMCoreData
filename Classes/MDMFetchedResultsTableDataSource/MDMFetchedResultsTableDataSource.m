@@ -175,31 +175,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
-  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex
-     forChangeType:(NSFetchedResultsChangeType)type {
-   
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
-            
-            break;
-
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
-            
-            break;
-            
-        default:
-            ALog(@"Missing NSFechedResultsChange case");
-            
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath
      forChangeType:(NSFetchedResultsChangeType)type
@@ -208,36 +183,35 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                                  withRowAnimation:UITableViewRowAnimationNone];
            
             break;
-
+//
         case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-           
             break;
-
-        case NSFetchedResultsChangeUpdate:
-            if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
-                
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-           
-            break;
-
-        case NSFetchedResultsChangeMove:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-           
-            break;
+//
+//        case NSFetchedResultsChangeUpdate:
+//            if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
+//                
+//                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//            }
+//           
+//            break;
+//
+//        case NSFetchedResultsChangeMove:
+//            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+//                                  withRowAnimation:UITableViewRowAnimationNone];
+//            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+//                                  withRowAnimation:UITableViewRowAnimationNone];
+//           
+//            break;
         default:
+            NSLog(@"Missing NSFechedResultsChange case");
             ALog(@"Missing NSFechedResultsChange case");
 
             break;
     }
 }
+
 
 @end
