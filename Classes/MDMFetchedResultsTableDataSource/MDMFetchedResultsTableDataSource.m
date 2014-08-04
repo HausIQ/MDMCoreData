@@ -165,52 +165,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    
-    [self.tableView endUpdates];
-}
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
-    
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationNone];
-           
-            break;
-//
-        case NSFetchedResultsChangeDelete:
-            break;
-//
-//        case NSFetchedResultsChangeUpdate:
-//            if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
-//                
-//                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//            }
-//           
-//            break;
-//
-//        case NSFetchedResultsChangeMove:
-//            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-//                                  withRowAnimation:UITableViewRowAnimationNone];
-//            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-//                                  withRowAnimation:UITableViewRowAnimationNone];
-//           
-//            break;
-        default:
-            NSLog(@"Missing NSFechedResultsChange case");
-            ALog(@"Missing NSFechedResultsChange case");
-
-            break;
-    }
+    [self.tableView reloadData];
 }
 
 
